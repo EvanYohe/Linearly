@@ -23,18 +23,13 @@
         </table>
         <!-- Add/Remove matrix rows or columns button group -->
         <div class="row m-1">
-            <div class="col">
-                <div class="input-group" id="matrix-input">
-                    <form action="#" th:action="@{/matrixmodule/4x4}" th:object="${dimension}" method="post">
-                        <input type="text" class="form-control" th:field="*{rows}" placeholder="Rows">
-                        <input type="text" class="form-control" th:field="*{cols}" placeholder="Columns">
-                        <span class="input-group-btn">
-                        <input class="btn btn-primary" type="submit" value="Submit" />
-                    </span>
-                    </form>
-                </div>
+            <div class="input-group p-0" id="matrix-input">
+                <input type="text" class="form-control" placeholder="Rows">
+                <input type="text" class="form-control" placeholder="Columns">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary">Submit</button>
+                </span>
             </div>
-            
         </div>
     </div>
     <!-- Output matrix -->
@@ -58,9 +53,12 @@
         </table>
         <!-- Add/Remove matrix rows or columns button group -->
         <div class="row m-1">
-            <div class="input-group">
-                <input type="text" class="form-control" id="" placeholder="Rows">
-                <input type="text" class="form-control" id="" placeholder="Columns">
+            <div class="input-group p-0" id="matrix-input">
+                <input type="text" class="form-control" placeholder="Rows">
+                <input type="text" class="form-control" placeholder="Columns">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary">Submit</button>
+                </span>
             </div>
         </div>
     </div>
