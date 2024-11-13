@@ -59,11 +59,7 @@
         <div class="container mx-auto border border-primary border-3 justify-content-center align-items-center" id="module-container"> 
             <div class="container text-center">
                 <p class="m-5 fs-4">
-                    This is a proof of concept for the final project, similar to the hello world program you asked
-                    for if we were going to create something like a minecraft mod. I realize that I'm using a 
-                    framework that is incredibly advanced and the ~six hours I
-                    spent making this has proven that. Like anything else, practice and familiarity with the
-                    environment will make it easier to use and efficiency will grow with time.
+                    Click a button above.
                 </p>
                 <h2 class="text-center">Select a module to begin</h2>
             </div>
