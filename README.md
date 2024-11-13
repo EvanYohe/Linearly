@@ -1,8 +1,4 @@
-# Use either(?) command from the repo directory to run (requires maven)
+## To launch you need to cd into the /control directory inside the repository because there's no POM.xml file configured for the repository root.
+
+> cd /Linearly/control
 > mvn spring-boot:run
-
-or
-
-> mvn run
-
-I usually launch with the spring boot command but I think the traditional maven run command just redirects to the spring boot command.
