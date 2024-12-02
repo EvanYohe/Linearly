@@ -5,7 +5,7 @@ public class Matrix {
     protected int rowDimension;
     protected int colDimension;
     protected double[][] matrix;
-    final double EPSILON = 1.0e-7;
+    final double EPSILON = 1.0e-6;
 
     /**
      * Default constructor for creating an empty matrix
@@ -38,6 +38,24 @@ public class Matrix {
         this.rowDimension = rowDimension;
         this.colDimension = colDimension;
         this.matrix = new double[rowDimension][colDimension];
+    }
+
+    /**
+     * Constructor for creating a matrix from an array of RowVector objects
+     * 
+     * @param rowVectors
+     */
+    public Matrix(RowVector[] rowVectors) {
+        this.rowDimension = rowVectors.length;
+        this.colDimension = rowVectors[0].getDimension();
+        this.matrix = new double[rowDimension][colDimension];
+
+        for (int i = 0; i < rowDimension; i++) {
+            double[] vector = rowVectors[i].getVector();
+            for (int j = 0; j < colDimension; j++) {
+                matrix[i][j] = vector[j];
+            }
+        }
     }
 
     /**
@@ -98,6 +116,21 @@ public class Matrix {
     }
 
     /**
+     * Produce an array of RowVector objects from the matrix
+     * 
+     * @return RowVector[]
+     */
+    public RowVector[] toRowVectors() {
+
+        RowVector[] rowVectors = new RowVector[rowDimension];
+
+        for (int i = 0; i < rowDimension; i++) {
+            rowVectors[i] = new RowVector(matrix[i]);
+        }
+        return rowVectors;
+    }
+
+    /**
      * Internal print function for terminal testing
      * 
      */
@@ -119,190 +152,5 @@ public class Matrix {
             }
             System.out.println("+");
 		}
-    }
-
-    /**
-     * Determines if a matrix is n x n dimensional (square)
-     * 
-     * @return boolean
-     */
-    public boolean isSquare() {
-
-        return rowDimension == colDimension;
-    }
-
-    /**
-     * Determines if a matrix is invertible using gaussian elimination
-     * 
-     * @return boolean
-     */
-    // TODO: REVISIT WITH GAUSSIAN ELIMINATION TO REDUCE COMPUTATION
-    public boolean isInvertible() {
-
-        if (getDeterminant() == 0) return false;
-
-        return true;
-    }
-
-    /**
-     * Determines if the ij-th entry is equal to the ji-th entry for all i, j
-     * i.e. if the matrix is symmetrix along the main diagonal
-     * 
-     * @return boolean
-     */
-    public boolean isSymmetric() {
-
-        if (!isSquare()) return false;
-
-        for (int i = 0; i < rowDimension; i++) {
-            for (int j = 0; j < colDimension; j++) {
-                if (getEntry(i, j) != getEntry(j, i)) return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Determines if the ij-th entry is equal to zero for all i != j
-     * i.e. if the matrix entry has a value of zero when i != j
-     * 
-     * @return boolean
-     */
-    public boolean isDiagonal() {
-
-        if (!isSquare()) return false;
-
-        for (int i = 0; i < rowDimension; i++) {
-            for (int j = 0; j < colDimension; j++) {
-                if (getEntry(i, j) != getEntry(j, i)) return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Determines if the ij-th entry is equal to 1 for all i == j
-     * i.e. if the matrix entry has a value of one when i == j
-     * 
-     * @return boolean
-     */
-    public boolean isIdentity() {
-
-        if (!isDiagonal()) return false;
-
-        for (int i = 0; i < rowDimension; i++) {
-            if (getEntry(i, i) != 1) return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Returns the transpose of the matrix
-     * i.e rows become columns and columns become rows
-     * 
-     * @return Matrix
-     */
-    public Matrix getTranspose() {
-
-        double[][] temp = new double[colDimension][rowDimension];
-
-        for (int i = 0; i < rowDimension; i++) {
-            for (int j = 0; j < colDimension; j++) {
-                temp[j][i] = matrix[i][j];
-            }
-        }
-
-        Matrix transpose = new Matrix(temp);
-        return transpose;
-    }
-
-    /**
-     * Returns the inverse of the matrix
-     * i.e. the matrix that when multiplied by the original matrix gives the identity matrix
-     * 
-     * @return Matrix
-     */
-    // TODO: REVISIT WITH GAUSSIAN ELIMINATION TO REDUCE COMPUTATION
-    public Matrix getInverse() {
-
-        return new Matrix();
-    }
-
-    // TODO: REVISIT
-    public double getDeterminant() {
-
-        if (!isSquare()) throw new IllegalArgumentException("Matrix must be square");
-
-        return getDeterminant(matrix);
-    }
-
-    // TODO: REVISIT
-    private double getDeterminant(double[][] matrix) {
-
-        if (rowDimension == 1) return getEntry(0, 0);
-        if (rowDimension == 2) return (getEntry(0, 0) * getEntry(1, 1)) - (getEntry(0, 1) * getEntry(1, 0));
-        if (rowDimension == 3) {
-            return (getEntry(0, 0) * getEntry(1, 1) * getEntry(2, 2)) +
-                    (getEntry(0, 1) * getEntry(1, 2) * getEntry(2, 0)) +
-                    (getEntry(0, 2) * getEntry(1, 0) * getEntry(2, 1)) -
-                    (getEntry(0, 2) * getEntry(1, 1) * getEntry(2, 0)) -
-                    (getEntry(0, 0) * getEntry(1, 2) * getEntry(2, 1)) -
-                    (getEntry(0, 1) * getEntry(1, 0) * getEntry(2, 2));
-        }
-        if (isDiagonal()) {
-            double determinant = 1;
-            for (int i = 0; i < rowDimension; i++) {
-                determinant *= getEntry(i, i);
-            }
-            return determinant;
-        }
-        
-        return laplaceExpansion(matrix);
-    }
-
-    // TODO: REVISIT
-    private double laplaceExpansion(double[][] matrix) {
-
-        if (matrix.length == 3) {
-            return (matrix[0][0] * matrix[1][1] * matrix[2][2]) +
-                    (matrix[0][1] * matrix[1][2] * matrix[2][0]) +
-                    (matrix[0][2] * matrix[1][0] * matrix[2][1]) -
-                    (matrix[0][2] * matrix[1][1] * matrix[2][0]) -
-                    (matrix[0][0] * matrix[1][2] * matrix[2][1]) -
-                    (matrix[0][1] * matrix[1][0] * matrix[2][2]);
-        }
-
-        double determinant = 0;
-
-        for (int i = 0; i < matrix.length; i++) {
-            int sign = ((i & 1) == 0) ? +1 : -1;
-            determinant += sign * getEntry(0, i) * laplaceExpansion(subMatrix(matrix, 0, i));
-        }
-
-        return determinant;
-    }
-
-    // TODO: REVISIT
-    private double[][] subMatrix(double[][] matrix, int excludedRow, int excludedCol) {
-
-        double[][] subMatrix = new double[matrix.length - 1][matrix.length - 1];
-        int rowPointer = -1;
-
-        for (int i = 0; i < matrix.length; i++) {
-          if (i == excludedRow) continue;
-          
-          ++rowPointer;
-          int colPointer = -1;
-
-          for (int j = 0; j < matrix.length; j++) {
-            if (j == excludedCol) continue;
-
-            subMatrix[rowPointer][++colPointer] = matrix[i][j];
-          }
-        }
-        return subMatrix;
     }
 }
