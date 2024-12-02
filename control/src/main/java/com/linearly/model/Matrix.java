@@ -41,24 +41,6 @@ public class Matrix {
     }
 
     /**
-     * Constructor for creating a matrix from an array of RowVector objects
-     * 
-     * @param rowVectors
-     */
-    public Matrix(RowVector[] rowVectors) {
-        this.rowDimension = rowVectors.length;
-        this.colDimension = rowVectors[0].getDimension();
-        this.matrix = new double[rowDimension][colDimension];
-
-        for (int i = 0; i < rowDimension; i++) {
-            double[] vector = rowVectors[i].getVector();
-            for (int j = 0; j < colDimension; j++) {
-                matrix[i][j] = vector[j];
-            }
-        }
-    }
-
-    /**
      * Returns the number of rows in the matrix
      * 
      * @return int
@@ -113,21 +95,6 @@ public class Matrix {
      */
     public void setEntry(int row, int col, double value) {
         matrix[row][col] = value;
-    }
-
-    /**
-     * Produce an array of RowVector objects from the matrix
-     * 
-     * @return RowVector[]
-     */
-    public RowVector[] toRowVectors() {
-
-        RowVector[] rowVectors = new RowVector[rowDimension];
-
-        for (int i = 0; i < rowDimension; i++) {
-            rowVectors[i] = new RowVector(matrix[i]);
-        }
-        return rowVectors;
     }
 
     /**

@@ -1,4 +1,6 @@
-package com.linearly.model;
+package com.linearly.operations;
+
+import com.linearly.model.Matrix;
 
 public class MatrixOperations {
 
