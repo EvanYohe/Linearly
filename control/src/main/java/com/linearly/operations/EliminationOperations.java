@@ -8,38 +8,43 @@ public class EliminationOperations {
 
     /**
      * Reduce a matrix to row echelon form using Gaussian elimination
+     * This method works as intended, be careful when checking against
+     * a calculator as floating point errors may occur or skew results
      * 
      * @param matrix
      * @return Matrix
      */
     public static Matrix rowEchelonForm(Matrix matrix) {
 
-        double[][] temp = matrix.getMatrix();
+        double[][] copy = matrix.getMatrix();
         int rowCount = matrix.getRowDimension();
 
         for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
 
             int pivotIndex = rowIndex; 
             for (int j = rowIndex + 1; j < rowCount; j++) {
-                if (Math.abs(temp[j][rowIndex]) > Math.abs(temp[pivotIndex][rowIndex])) {
+                if (Math.abs(copy[j][rowIndex]) > Math.abs(copy[pivotIndex][rowIndex])) {
                     pivotIndex = j;
                 }
             }
-            swap(temp, rowIndex, pivotIndex);
+            swap(copy, rowIndex, pivotIndex);
 
             for (int j = rowIndex + 1; j < rowCount; j++) {
-                double scalar = temp[j][rowIndex] / temp[rowIndex][rowIndex];
-                temp[j] = subtract(temp[j], scale(temp[rowIndex], scalar));
+                double scalar = copy[j][rowIndex] / copy[rowIndex][rowIndex];
+                copy[j] = subtract(copy[j], scale(copy[rowIndex], scalar));
             }
-            temp[rowIndex] = scale(temp[rowIndex], 1 / temp[rowIndex][rowIndex]);
+            copy[rowIndex] = scale(copy[rowIndex], 1 / copy[rowIndex][rowIndex]);
         }
-        matrix.setMatrix(temp);
-        return matrix;
+        Matrix result = new Matrix(copy);
+        return result;
     }
 
     /**
      * Reduce a matrix to reduced row echelon form using
      * back substitution on a matrix in row echelon form
+     * 
+     * This method works as intended, be careful when checking against
+     * a calculator as floating point errors may occur or skew results
      * 
      * @param matrix
      * @return Matrix
@@ -54,8 +59,8 @@ public class EliminationOperations {
                 reduced[j] = subtract(reduced[j], scale(reduced[i], scalar));
             }
         }
-        matrix.setMatrix(reduced);
-        return matrix;
+        Matrix result = new Matrix(reduced);
+        return result;
     }
 
     /**

@@ -24,7 +24,10 @@ public class MatrixOperations {
     // TODO: REVISIT WITH GAUSSIAN ELIMINATION TO REDUCE COMPUTATION
     public static boolean isInvertible(Matrix matrix) {
 
-        if (getDeterminant(matrix) == 0) return false;
+        Matrix copy = new Matrix(matrix.getMatrix());
+        copy = EliminationOperations.reducedRowEchelonForm(copy);
+
+        if (!isIdentity(copy)) return false;
 
         return true;
     }
@@ -85,6 +88,81 @@ public class MatrixOperations {
     }
 
     /**
+     * Returns the sum of two matrices
+     * 
+     * @param matrixOne
+     * @param matrixTwo
+     * @return Matrix
+     */
+    public static Matrix add(Matrix matrixOne, Matrix matrixTwo) {
+
+        if (matrixOne.getRowDimension() != matrixTwo.getRowDimension() ||
+            matrixOne.getColDimension() != matrixTwo.getColDimension()) {
+            throw new IllegalArgumentException("Matrices must have the same dimensions");
+        }
+
+        Matrix result = new Matrix(matrixOne.getRowDimension(), matrixOne.getColDimension());
+
+        for (int i = 0; i < matrixOne.getRowDimension(); i++) {
+            for (int j = 0; j < matrixOne.getColDimension(); j++) {
+                result.setEntry(i, j, matrixOne.getEntry(i, j) + matrixTwo.getEntry(i, j));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Returns the difference of two matrices
+     * 
+     * @param matrixOne
+     * @param matrixTwo
+     * @return Matrix
+     */
+    public static Matrix subtract(Matrix matrixOne, Matrix matrixTwo) {
+            
+            if (matrixOne.getRowDimension() != matrixTwo.getRowDimension() ||
+                matrixOne.getColDimension() != matrixTwo.getColDimension()) {
+                throw new IllegalArgumentException("Matrices must have the same dimensions");
+            }
+    
+            Matrix result = new Matrix(matrixOne.getRowDimension(), matrixOne.getColDimension());
+    
+            for (int i = 0; i < matrixOne.getRowDimension(); i++) {
+                for (int j = 0; j < matrixOne.getColDimension(); j++) {
+                    result.setEntry(i, j, matrixOne.getEntry(i, j) - matrixTwo.getEntry(i, j));
+                }
+            }
+            return result;
+    }
+
+    /**
+     * Returns the product of two matrices
+     * 
+     * @param matrixOne
+     * @param matrixTwo
+     * @return Matrix
+     */
+    public static Matrix multiply(Matrix matrixOne, Matrix matrixTwo) {
+
+        if (matrixOne.getColDimension() != matrixTwo.getRowDimension()) {
+            throw new IllegalArgumentException("Matrix A must have the same number of columns as the number of rows in Matrix B");
+        }
+
+        Matrix result = new Matrix(matrixOne.getRowDimension(), matrixTwo.getColDimension());
+
+        for (int i = 0; i < matrixOne.getRowDimension(); i++) {
+            for (int j = 0; j < matrixTwo.getColDimension(); j++) {
+                double sum = 0;
+                for (int k = 0; k < matrixOne.getColDimension(); k++) {
+                    sum += matrixOne.getEntry(i, k) * matrixTwo.getEntry(k, j);
+                }
+                result.setEntry(i, j, sum);
+            }
+        }
+        return result;
+    }
+
+    /**
      * Returns the transpose of the matrix
      * i.e rows become columns and columns become rows
      * 
@@ -107,12 +185,34 @@ public class MatrixOperations {
      * Returns the inverse of the matrix
      * i.e. the matrix that when multiplied by the original matrix gives the identity matrix
      * 
+     * @param matrix
      * @return Matrix
      */
-    // TODO: REVISIT WITH GAUSSIAN ELIMINATION TO REDUCE COMPUTATION
-    public static Matrix getInverse() {
+    public static Matrix getInverse(Matrix matrix) {
 
-        return new Matrix();
+        Matrix copy = new Matrix(matrix.getMatrix());
+        Matrix identity = new Matrix(matrix.getRowDimension(), matrix.getColDimension());
+
+        //if (!isSquare(copy)) throw new IllegalArgumentException("Matrix must be square");
+        //if (!isInvertible(copy)) throw new IllegalArgumentException("Matrix is not invertible");
+
+        copy = new Matrix(copy.getRowDimension(), copy.getColDimension() * 2);
+
+        for (int i = 0; i < matrix.getRowDimension(); i++) {
+            for (int j = 0; j < matrix.getColDimension(); j++) {
+                copy.setEntry(i, j, matrix.getEntry(i, j));
+            }
+            copy.setEntry(i, i + matrix.getColDimension(), 1);
+        }
+
+        EliminationOperations.reducedRowEchelonForm(copy);
+
+        for (int i = 0; i < matrix.getRowDimension(); i++) {
+           for (int j = 0; j < matrix.getColDimension(); j++) {
+               identity.setEntry(i, j, copy.getEntry(i, j + matrix.getColDimension()));
+           }
+        }
+        return identity;
     }
 
     // TODO: REVISIT
@@ -161,7 +261,7 @@ public class MatrixOperations {
         double determinant = 0;
 
         for (int i = 0; i < matrix.getRowDimension(); i++) {
-            int sign = ((i & 1) == 0) ? +1 : -1;
+            int sign = ((i & 1) == 0) ? + 1 : - 1;
             determinant += sign * matrix.getEntry(0, i) * laplaceExpansion(subMatrix(matrix, 0, i));
         }
 

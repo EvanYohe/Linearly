@@ -12,17 +12,11 @@ public class MainApplication {
 
 	public static void main(String[] args) {
 
-		Matrix matrix = new Matrix(new double[][] {
-			{ 8, 4, 8 },
-			{ 14, 10, 17 },
-			{ 16, 16, 29 }
-		});
-		
-		EliminationOperations.rowEchelonForm(matrix).printMatrix();
-		EliminationOperations.reducedRowEchelonForm(matrix).printMatrix();
+		// Matrix matrixA = new Matrix(new double[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });
+		// Matrix matrixB = new Matrix(new double[][] { { 2, 3, 2 }, { 3, 2, 3 }, { 2, 3, 2 } });
 
 		// TODO: Remove before testing in web setting
-		System.exit(1);
+		// System.exit(1);
 		SpringApplication.run(MainApplication.class, args);
 	}
 }

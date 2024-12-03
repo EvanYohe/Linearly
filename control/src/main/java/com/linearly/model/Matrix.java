@@ -49,6 +49,10 @@ public class Matrix {
         return rowDimension;
     }
 
+    public void setRowDimension(int rowDimension) {
+        this.rowDimension = rowDimension;
+    }
+
     /**
      * Returns the number of columns in the matrix
      * 
@@ -56,6 +60,10 @@ public class Matrix {
      */
     public int getColDimension() {
         return colDimension;
+    }
+    
+    public void setColDimension(int colDimension) {
+        this.colDimension = colDimension;
     }
 
     /**
@@ -103,7 +111,7 @@ public class Matrix {
      */
     public void printMatrix() {
 
-        String format = "| %5.1f ";
+        String format = "| %5.3f ";
 
         for (int i = 0; i < colDimension; i++) {
             System.out.print("+-------");

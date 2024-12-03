@@ -1,40 +1,42 @@
+@param com.linearly.model.Matrix inputMatrixA
+@param com.linearly.model.Matrix inputMatrixB
+@param com.linearly.model.Matrix outputMatrix
+@param int newRows
+@param int newCols
+
+
+
 <!-- Header of Module -->
 <h2 class="text-center">Matrix Calculator</h2>
 <!-- Row Wrapper for double matricies -->
 <div class="row m-2">
-    <!-- Input matrix -->
+    <!-- Input matrix A -->
     <div class="col-6">
-        <table id="input-matrix" class="m-2 table table-bordered border-secondary mx-auto border border-3 border-primary text-center">
-            <tr>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-            </tr>
-            <tr>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-            </tr>
-            <tr>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-            </tr>
-        </table>
+        <div class="container" id="input-matrix-A">
+            @template.input-matrix(inputMatrixA)
+        </div>
         <!-- Add/Remove matrix rows or columns button group -->
         <div class="row m-1">
-            <div class="input-group p-0" id="matrix-input">
-                <input type="text" class="form-control" placeholder="Rows">
-                <input type="text" class="form-control" placeholder="Columns">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary">Submit</button>
-                </span>
-            </div>
+            <form
+                hx-post="/submit-input-A"
+                hx-target="#input-matrix-A"
+                hx-swap="outerHTML"
+                hx-on::submit="this.reset();">
+                <input
+                    id="input-matrix-A-rows"
+                    type="text"
+                    name="newRows">
+                <input
+                    id="input-matrix-A-cols"
+                    type="text"
+                    name="newCols">
+                <button type="submit">Submit</button>
+            </form>
         </div>
     </div>
-    <!-- Output matrix -->
+    <!-- Input matrix B -->
     <div class="col-6">
-        <table id="input-matrix" class="m-2 table table-bordered border-secondary mx-auto border border-3 border-primary text-center">
+        <table id="input-matrix-B" class="m-2 table table-bordered border-secondary mx-auto border border-3 border-primary text-center">
             <tr>
                 <td><input type="text" class="form-control"></td>
                 <td><input type="text" class="form-control"></td>
@@ -73,6 +75,34 @@
             <div class="col-4 d-grid gap-2 mx-auto"><button type="button" class="btn btn-secondary">Inverse</button></div>
             <div class="col-4 d-grid gap-2 mx-auto"><button type="button" class="btn btn-secondary">Transpose</button></div>
             <div class="col-4 d-grid gap-2 mx-auto"><button type="button" class="btn btn-secondary">Determinant</button></div>
+        </div>
+    </div>
+
+    <div class="container border border-top border-primary">
+        <div class="row m-2">
+            <div class="col-8">
+                <table id="output-matrix" class="m-2 table table-bordered border-secondary mx-auto border border-3 border-primary text-center">
+                <tr>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                </tr>
+            </table>
+            </div>
+            <div class="col-4">
+                <h2>Operation</h2>
+                <p>This paragraph will describe the output based on the operation</p>
+            </div>
         </div>
     </div>
 </div>
