@@ -24,7 +24,6 @@ public class MatrixController {
         model.addAttribute("newRows", newRows);
         model.addAttribute("newCols", newCols);
         model.addAttribute("inputMatrixA", new Matrix(3, 3));
-        model.addAttribute("inputMatrixB", new Matrix(3, 3));
         model.addAttribute("outputMatrix", new Matrix(3, 3));
 
         return "matrix-module";

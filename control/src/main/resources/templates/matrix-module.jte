@@ -1,5 +1,4 @@
 @param com.linearly.model.Matrix inputMatrixA
-@param com.linearly.model.Matrix inputMatrixB
 @param com.linearly.model.Matrix outputMatrix
 @param int newRows
 @param int newCols
@@ -32,36 +31,6 @@
                     name="newCols">
                 <button type="submit">Submit</button>
             </form>
-        </div>
-    </div>
-    <!-- Input matrix B -->
-    <div class="col-6">
-        <table id="input-matrix-B" class="m-2 table table-bordered border-secondary mx-auto border border-3 border-primary text-center">
-            <tr>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-            </tr>
-            <tr>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-            </tr>
-            <tr>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-                <td><input type="text" class="form-control"></td>
-            </tr>
-        </table>
-        <!-- Add/Remove matrix rows or columns button group -->
-        <div class="row m-1">
-            <div class="input-group p-0" id="matrix-input">
-                <input type="text" class="form-control" placeholder="Rows">
-                <input type="text" class="form-control" placeholder="Columns">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary">Submit</button>
-                </span>
-            </div>
         </div>
     </div>
     <!-- Button group for matrix operations -->
