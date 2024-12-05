@@ -12,9 +12,9 @@ public class Matrix {
      * 
      */
     public Matrix() {
-        this.rowDimension = 0;
-        this.colDimension = 0;
-        this.matrix = null;
+        this.rowDimension = 3;
+        this.colDimension = 3;
+        this.matrix = new double[rowDimension][colDimension];
     }
 
     /**

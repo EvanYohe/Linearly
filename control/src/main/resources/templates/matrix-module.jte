@@ -1,39 +1,29 @@
-@param com.linearly.model.Matrix inputMatrixA
-@param com.linearly.model.Matrix outputMatrix
-@param int newRows
-@param int newCols
+@import com.linearly.model.Matrix
 
+@param Matrix matrixA
 
-
-<!-- Header of Module -->
 <h2 class="text-center">Matrix Calculator</h2>
-<!-- Row Wrapper for double matricies -->
 <div class="row m-2">
-    <!-- Input matrix A -->
+    <!-- matrix A -->
     <div class="col-6">
-        <div class="container" id="input-matrix-A">
-            @template.input-matrix(inputMatrixA)
+        <div class="container" id="matrix-A">
+            @template.input-matrix(matrixA)
         </div>
-        <!-- Add/Remove matrix rows or columns button group -->
         <div class="row m-1">
-            <form
+            <form 
                 hx-post="/submit-input-A"
-                hx-target="#input-matrix-A"
-                hx-swap="outerHTML"
-                hx-on::submit="this.reset();">
+                hx-target="#matrix-A"
+                hx-swap="outerHTML">
                 <input
-                    id="input-matrix-A-rows"
                     type="text"
-                    name="newRows">
+                    name="rows">
                 <input
-                    id="input-matrix-A-cols"
                     type="text"
-                    name="newCols">
+                    name="cols">
                 <button type="submit">Submit</button>
             </form>
         </div>
     </div>
-    <!-- Button group for matrix operations -->
     <div class="container m-1">
         <div class="row m-1 justify-content-center align-items-center text-center">
             <div class="col-4 d-grid gap-2 mx-auto"><button type="button" class="btn btn-secondary">Add</button></div>
