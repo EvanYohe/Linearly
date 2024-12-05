@@ -26,8 +26,8 @@
     <script src="/webjars/htmx.org/1.6.0/dist/htmx.js"></script>
 </head>
 <body>
-	<header th:fragment="header" class="m-2">
-        <h1 class="text-center">Linear Algebra Calulator Test</h1>
+	<header class="m-2">
+        <h1 class="text-center" href="/">Linear Algebra Calulator Test</h1>
     </header>
 	<main>
         <!-- Div wrapper for module selector, pseudo navbar -->
@@ -35,23 +35,17 @@
             <div class="row d-flex flex-column justify-content-center align-items-center text-center m-2">
                 <div class="col btn-group">
                     <a class="btn btn-primary"
-                        hx-post="/matrix-module"
+                        hx-get="/matrix-module"
                         hx-trigger="click"
                         hx-target="#module-container"
                         hx-swap="innterHTML"
                     >Matrix Calculator</a>
                     <a class="btn btn-primary"
-                        hx-post="/elimination-module"
+                        hx-get="/elimination-module"
                         hx-trigger="click"
                         hx-target="#module-container"
                         hx-swap="innterHTML"
                     >Elimination Calculator</a>
-                    <a class="btn btn-primary"
-                        hx-post="/vectorspace-module"
-                        hx-trigger="click"
-                        hx-target="#module-container"
-                        hx-swap="innterHTML"
-                    >Vectorspace(s) Calculator</a>
                 </div>
             </div>
         </div>

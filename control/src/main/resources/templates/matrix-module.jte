@@ -1,25 +1,49 @@
 @import com.linearly.model.Matrix
 
 @param Matrix matrixA
+@param int rowsMatrixA = 3
+@param int colsMatrixA = 3
+
+@param Matrix matrixB
+@param int rowsMatrixB = 3
+@param int colsMatrixB = 3
 
 <h2 class="text-center">Matrix Calculator</h2>
 <div class="row m-2">
-    <!-- matrix A -->
     <div class="col-6">
         <div class="container" id="matrix-A">
-            @template.input-matrix(matrixA)
+             @template.input-matrix-A(matrixA, rowsMatrixA, colsMatrixA)
         </div>
         <div class="row m-1">
             <form 
-                hx-post="/submit-input-A"
+                hx-get="/submit-matrix-A"
                 hx-target="#matrix-A"
-                hx-swap="outerHTML">
+                hx-swap="innerHTML">
                 <input
                     type="text"
-                    name="rows">
+                    name="rowsMatrixA"><!-- These correspond to the @RequestParam in the Controller class -->
                 <input
                     type="text"
-                    name="cols">
+                    name="colsMatrixA"><!-- These correspond to the @RequestParam in the Controller class -->
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="container" id="matrix-B">
+             @template.input-matrix-B(matrixB, rowsMatrixB, colsMatrixB)
+        </div>
+        <div class="row m-1">
+            <form 
+                hx-get="/submit-matrix-B"
+                hx-target="#matrix-B"
+                hx-swap="innerHTML">
+                <input
+                    type="text"
+                    name="rowsMatrixB"><!-- These correspond to the @RequestParam in the Controller class -->
+                <input
+                    type="text"
+                    name="colsMatrixB"><!-- These correspond to the @RequestParam in the Controller class -->
                 <button type="submit">Submit</button>
             </form>
         </div>
