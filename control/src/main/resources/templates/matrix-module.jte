@@ -1,10 +1,11 @@
 @import com.linearly.model.Matrix
 
 @param Matrix matrixA
+@param Matrix matrixB
+
 @param int rowsMatrixA = 3
 @param int colsMatrixA = 3
 
-@param Matrix matrixB
 @param int rowsMatrixB = 3
 @param int colsMatrixB = 3
 
@@ -12,7 +13,7 @@
 <div class="row m-2">
     <div class="col-6">
         <div class="container" id="matrix-A">
-             @template.input-matrix-A(matrixA, rowsMatrixA, colsMatrixA)
+             @template.input-matrix(matrixA, rowsMatrixA, colsMatrixA)
         </div>
         <div class="row m-1">
             <form 
@@ -31,7 +32,7 @@
     </div>
     <div class="col-6">
         <div class="container" id="matrix-B">
-             @template.input-matrix-B(matrixB, rowsMatrixB, colsMatrixB)
+             @template.input-matrix(matrixB, rowsMatrixB, colsMatrixB)
         </div>
         <div class="row m-1">
             <form 

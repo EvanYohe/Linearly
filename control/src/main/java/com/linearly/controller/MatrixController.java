@@ -3,7 +3,6 @@ package com.linearly.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.linearly.model.Matrix;
@@ -21,7 +20,10 @@ public class MatrixController {
     }
 
     @GetMapping("/submit-matrix-A")
-    public String submitInputA(@RequestParam int rowsMatrixA, @RequestParam int colsMatrixA, Matrix matrixA, Model model) {
+    public String submitInputA( @RequestParam int rowsMatrixA,
+                                @RequestParam int colsMatrixA,
+                                Matrix matrixA,
+                                Model model) {
 
         matrixA.setRowDimension(rowsMatrixA);
         matrixA.setColDimension(colsMatrixA);
@@ -32,7 +34,10 @@ public class MatrixController {
         return "input-matrix-A";
     }
     @GetMapping("/submit-matrix-B")
-    public String submitInputB(@RequestParam int rowsMatrixB, @RequestParam int colsMatrixB, Matrix matrixB, Model model) {
+    public String submitInputB( @RequestParam int rowsMatrixB,
+                                @RequestParam int colsMatrixB,
+                                Matrix matrixB,
+                                Model model) {
 
         matrixB.setRowDimension(rowsMatrixB);
         matrixB.setColDimension(colsMatrixB);
