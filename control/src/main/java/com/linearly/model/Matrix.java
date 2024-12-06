@@ -2,9 +2,9 @@ package com.linearly.model;
 
 public class Matrix {
 
-    protected int rowDimension;
-    protected int colDimension;
-    protected double[][] matrix;
+    private int rowDimension;
+    private int colDimension;
+    private double[][] matrix;
     final double EPSILON = 1.0e-6;
 
     /**

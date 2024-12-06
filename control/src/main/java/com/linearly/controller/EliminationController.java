@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class EliminationController {
 
       /**
-     * Maps the HTTP POST request to the /elimination-module URL to the elimination-module.jte file.
+     * Maps the HTTP GET request to the /elimination-module URL to the elimination-module.jte file.
      * 
      * @param Model the model object to be used in the view
      * @return String

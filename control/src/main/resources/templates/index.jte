@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
-
-<head th:fragment="head">
+<head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Demo</title>
@@ -50,7 +49,8 @@
             </div>
         </div>
         <!-- Div wrapper for the specific module to load into -->
-        <div class="container mx-auto border border-primary border-3 justify-content-center align-items-center" id="module-container"> 
+        <div class="container mx-auto border border-primary border-3 justify-content-center align-items-center" 
+             id="module-container"> 
             <div class="container text-center">
                 <p class="m-5 fs-4">
                     Click a button above.

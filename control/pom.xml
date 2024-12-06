@@ -28,15 +28,25 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		<dependency><!-- Spring Boot Core -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency><!-- JTE (Java Template Engine) -->
 			<groupId>gg.jte</groupId>
 			<artifactId>jte-spring-boot-starter-3</artifactId>
 			<version>3.1.14</version>
 		</dependency>
-		<dependency><!-- Spring Boot Core -->
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+		<dependency><!-- JTE (Java Template Engine) -->
+			<groupId>gg.jte</groupId>
+			<artifactId>jte</artifactId>
+			<version>3.1.14</version>
+		</dependency>
+		<dependency><!-- HTMX -->
+		<groupId>io.github.wimdeblauwe</groupId>
+			<artifactId>htmx-spring-boot</artifactId>
+			<version>3.5.0</version>
 		</dependency>
 		<dependency><!-- Webjars (Bootstrap 5, PopperJS, HTMX) -->
 			<groupId>org.webjars</groupId>
@@ -57,11 +67,7 @@
 			<artifactId>htmx.org</artifactId>
 			<version>1.6.0</version>
 		</dependency>
-		<dependency>
-			<groupId>gg.jte</groupId>
-			<artifactId>jte</artifactId>
-			<version>3.1.14</version>
-		</dependency>
+		
 	</dependencies>
 
 	<build>

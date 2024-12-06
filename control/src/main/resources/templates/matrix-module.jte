@@ -13,7 +13,7 @@
 <div class="row m-2">
     <div class="col-6">
         <div class="container" id="matrix-A">
-             @template.input-matrix(matrixA, rowsMatrixA, colsMatrixA)
+             @template.input-matrix-A(matrixA, rowsMatrixA, colsMatrixA)
         </div>
         <div class="row m-1">
             <form 
@@ -32,7 +32,7 @@
     </div>
     <div class="col-6">
         <div class="container" id="matrix-B">
-             @template.input-matrix(matrixB, rowsMatrixB, colsMatrixB)
+             @template.input-matrix-B(matrixB, rowsMatrixB, colsMatrixB)
         </div>
         <div class="row m-1">
             <form 
@@ -51,7 +51,13 @@
     </div>
     <div class="container m-1">
         <div class="row m-1 justify-content-center align-items-center text-center">
-            <div class="col-4 d-grid gap-2 mx-auto"><button type="button" class="btn btn-secondary">Add</button></div>
+            <div class="col-4 d-grid gap-2 mx-auto">
+            
+                <button type="button" 
+                        class="btn btn-secondary"
+                        hx-post="/build-matrix-A"
+                        hx-target="#matrix-A">Add</button></div>
+
             <div class="col-4 d-grid gap-2 mx-auto"><button type="button" class="btn btn-secondary">Subtract</button></div>
             <div class="col-4 d-grid gap-2 mx-auto"><button type="button" class="btn btn-secondary">Multiply</button></div>
         </div>
